@@ -28,7 +28,7 @@ public class ItemThingModel extends ItemModel {
     Mesh mesh;
     Texture texture;
 
-    GameShader program = new MeshData(ItemShader.DEFAULT_ITEM_SHADER, RenderOrder.FULLY_TRANSPARENT).shader;
+    GameShader program = new MeshData(ItemShader.DEFAULT_ITEM_SHADER, RenderOrder.FULLY_TRANSPARENT).getShader();
 
     static Matrix4 noRotMtrx = new Matrix4();
     static Camera itemCam2 = new OrthographicCamera(100F, 100F);
