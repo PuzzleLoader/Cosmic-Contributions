@@ -2,15 +2,15 @@
     "generators":
     [
         {
-            "stringId": "puzzle-loader:rotated",
+            "stringId": "base:rotated",
             "include":
             [
-                "puzzle-loader:rotated0", "puzzle-loader:rotated90",
-                "puzzle-loader:rotated180", "puzzle-loader:rotated270"
+                "base:rotated0", "base:rotated90",
+                "base:rotated180", "base:rotated270"
             ]
         },
         {
-            "stringId": "puzzle-loader:rotated0",
+            "stringId": "base:rotated0",
             "params":
             {
                 "stair_type":"bottom_NegX"
@@ -25,7 +25,7 @@
             }
         },
         {
-            "stringId": "puzzle-loader:rotated90",
+            "stringId": "base:rotated90",
             "params":
             {
                 "stair_type":"bottom_NegZ"
@@ -40,7 +40,7 @@
             }
         },
         {
-            "stringId": "puzzle-loader:rotated180",
+            "stringId": "base:rotated180",
             "params":
             {
                 "stair_type":"bottom_PosX"
@@ -55,7 +55,7 @@
             }
         },
         {
-            "stringId": "puzzle-loader:rotated270",
+            "stringId": "base:rotated270",
             "params":
             {
                 "stair_type":"bottom_PosZ"
