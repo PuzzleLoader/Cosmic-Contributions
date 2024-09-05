@@ -49,7 +49,11 @@ public class ItemThingModel extends ItemModel {
         String texturePath = (String) item.itemProperties.get("texture");
         this.texture = GameAssetLoader.getTexture(texturePath);
         texture = ItemModelBuilder.flip(texture);
-        mesh = ItemModelBuilder.build2_5DMesh(texture);
+        switch (item.getModelTypeString()) {
+            case "base:item2D": mesh = ItemModelBuilder.build2DMesh(); break;
+            case "base:item3D": mesh = ItemModelBuilder.build2_5DMesh(texture); break;
+        }
+
     }
 
     public boolean isTool() {
