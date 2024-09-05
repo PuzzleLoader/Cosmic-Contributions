@@ -5,13 +5,7 @@ plugins {
     id "com.github.johnrengelman.shadow"
 }
 
-group = "com.github"
-
-puzzle_loader {
-    accessManipulatorPath = file("src/main/resources/puzzle_loader.manipulator")
-//    fabricAccessWidenerPath = file("src/main/resources/puzzle_loader.accesswidener")
-//    forgeAccessTransformerPath = file("src/main/resources/META-INF/accesstransformer.cfg")
-}
+version = 0
 
 repositories {
     mavenCentral()
@@ -21,115 +15,14 @@ repositories {
     maven { url "https://libraries.minecraft.net" }
     maven { url "https://repo.spongepowered.org/repository/maven-public/" }
 
-//    ivy {
-//        name "feach"
-//        url "https://raw.githubusercontent.com/PuzzleLoader/CosmicStorage/main/"
-//        patternLayout {
-//            artifact "/preAlpha/[revision]/[classifier]/Cosmic Reach-[revision].jar"
-//            artifact "/alpha/[revision]/[classifier]/Cosmic Reach-[revision].jar"
-//        }
-//        // This is required in Gradle 6.0+ as metadata file (ivy.xml) is mandatory
-//        metadataSources {
-//            artifact()
-//        }
-//        content {
-//            includeGroup "finalforeach2"
-//        }
-//    }
-
-//    ivy {
-//        name "feach"
-//        url "https://raw.githubusercontent.com/PuzzleLoader/CosmicStorage/main/"
-//        patternLayout {
-//            artifact "/alpha/[revision]/[classifier]/Cosmic Reach-[revision].jar"
-//        }
-//        // This is required in Gradle 6.0+ as metadata file (ivy.xml) is mandatory
-//        metadataSources {
-//            artifact()
-//        }
-//        content {
-//            includeGroup "finalforeach2"
-//        }
-//    }
-
 }
 
-// do not remove fucks up building
 tasks.buildBundleJar.configure {dependsOn(tasks.compileJava)}
 
 dependencies {
-//    implementation "finalforeach2:cosmic-reach:0.1.45:client"
-
     compileOnly('org.jetbrains:annotations:24.0.0')
 
-    compileOnly("org.spongepowered:mixin:$mixinVersion")
-    bundle(annotationProcessor("io.github.llamalad7:mixinextras-common:$mixinExtrasVersion"))
-
-    bundle("com.google.guava:guava:$guavaVersion")
-    bundle("com.google.code.gson:gson:$gsonVersion")
-
-    bundle("org.hjson:hjson:$hjsonVersion")
-
-    bundle("com.mojang:brigadier:1.0.18")
-
-    compileOnly("org.ow2.asm:asm:$asmVersion")
-    compileOnly("org.ow2.asm:asm-tree:$asmVersion")
-    compileOnly("org.ow2.asm:asm-util:$asmVersion")
-    compileOnly("org.ow2.asm:asm-analysis:$asmVersion")
-    compileOnly("org.ow2.asm:asm-commons:$asmVersion")
-
-    bundle("org.apache.logging.log4j:log4j-api:$log4jVersion")
-    bundle("org.apache.logging.log4j:log4j-core:$log4jVersion")
-    bundle("org.apache.logging.log4j:log4j-slf4j2-impl:$log4jVersion")
-
-    bundle("net.sf.jopt-simple:jopt-simple:$joptSimpleVersion")
-
-    bundle("org.reflections:reflections:$reflectionsVersion")
-
-    bundle("dev.dewy:nbt:$nbtVersion")
-
-    bundle("org.greenrobot:eventbus:$eventbusVersion")
-
-//    implementation(files("./lib/Cosmic Reach-0.2.0.jar"))
-
-//    implementation {
-//        group: ""
-//        name: ""
-//        version: ""
-//        classifier: ""
-//    }
-}
-
-processResources {
-    def resourceTargets = ["assets/puzzle-loader/version.txt"]
-
-    String ver = version
-    if (!ver.contains(".")) {
-        ver = "69.69.69"
-    } else ver = (version + "").replaceAll((version + "").replaceAll("[\\d\\.]", ""), "")
-
-    def replaceProperties = [
-            "version"     : ver,
-    ]
-
-
-    inputs.properties replaceProperties
-    replaceProperties.put "project", project
-    filesMatching(resourceTargets) {
-        expand replaceProperties
-    }
-}
-
-publishing {
-    publications {
-        maven(MavenPublication) {
-            groupId = group
-            artifactId = id
-
-            artifact source: buildBundleJar, classifier: '', extension: 'jar'
-            artifact source: buildSourcesJar, classifier: 'source', extension: 'jar'
-        }
-    }
+    testImplementation("finalforeach:pre-alpha:0.2.0")
 }
 
 wrapper {

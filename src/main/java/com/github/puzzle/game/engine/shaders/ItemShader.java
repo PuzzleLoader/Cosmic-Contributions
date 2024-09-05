@@ -3,9 +3,11 @@ package com.github.puzzle.game.engine.shaders;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.VertexAttribute;
 import com.badlogic.gdx.graphics.VertexAttributes;
-import com.github.puzzle.core.Puzzle;
-import com.github.puzzle.core.resources.ResourceLocation;
+import com.github.puzzle.core.ResourceLocation;
 import finalforeach.cosmicreach.rendering.shaders.GameShader;
+
+// Mr-Zombii
+// repletsin5 - Replet
 
 public class ItemShader extends GameShader {
 
@@ -22,8 +24,8 @@ public class ItemShader extends GameShader {
 
     public static void initItemShader() {
         DEFAULT_ITEM_SHADER = new ItemShader(
-                new ResourceLocation(Puzzle.MOD_ID,"item_shader.vert.glsl").toString(),
-                new ResourceLocation(Puzzle.MOD_ID,"item_shader.frag.glsl").toString());
+                new ResourceLocation("base","item_shader.vert.glsl").toString(),
+                new ResourceLocation("base","item_shader.frag.glsl").toString());
     }
 
     public void bind(Camera worldCamera) {

@@ -4,9 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
-import com.github.puzzle.core.resources.PuzzleGameAssetLoader;
-import com.github.puzzle.game.engine.items.model.IPuzzleItemModel;
 import com.github.puzzle.game.engine.shaders.ItemShader;
+import finalforeach.cosmicreach.GameAssetLoader;
 import finalforeach.cosmicreach.blocks.BlockPosition;
 import finalforeach.cosmicreach.entities.Entity;
 import finalforeach.cosmicreach.gamestates.InGame;
@@ -15,13 +14,16 @@ import finalforeach.cosmicreach.items.ItemStack;
 import finalforeach.cosmicreach.items.ItemThing;
 import finalforeach.cosmicreach.rendering.MeshData;
 import finalforeach.cosmicreach.rendering.RenderOrder;
+import finalforeach.cosmicreach.rendering.items.ItemModel;
 import finalforeach.cosmicreach.rendering.shaders.GameShader;
 import finalforeach.cosmicreach.world.Sky;
 import finalforeach.cosmicreach.world.Zone;
 
 import java.lang.ref.WeakReference;
 
-public class ItemThingModel implements IPuzzleItemModel {
+// Mr-Zombii
+
+public class ItemThingModel extends ItemModel {
 
     Mesh mesh;
     Texture texture;
@@ -45,7 +47,7 @@ public class ItemThingModel implements IPuzzleItemModel {
     public ItemThingModel(ItemThing item) {
         this.item = item;
         String texturePath = (String) item.itemProperties.get("texture");
-        this.texture = PuzzleGameAssetLoader.LOADER.loadSync(texturePath, Texture.class);
+        this.texture = GameAssetLoader.getTexture(texturePath);
         texture = ItemModelBuilder.flip(texture);
         mesh = ItemModelBuilder.build2_5DMesh(texture);
     }
@@ -85,7 +87,7 @@ public class ItemThingModel implements IPuzzleItemModel {
     }
 
     @Override
-    public void renderInSlot(Vector3 pos, ItemStack stack, Camera slotCamera, Matrix4 tmpMatrix, boolean useAmbientLighting) {
+    public void render(Vector3 vector3, Camera slotCamera, Matrix4 matrix4, boolean b) {
         renderGeneric(new Vector3(0, 0, 0), slotCamera, noRotMtrx, true);
     }
 
@@ -100,10 +102,17 @@ public class ItemThingModel implements IPuzzleItemModel {
         return itemCam2;
     }
 
+    @Override
+    public void renderAsItemEntity(Vector3 pos, Camera entityCam, Matrix4 tmpMatrix) {
+        tmpMatrix.translate(0.5F, 0.2F, 0.5F);
+        tmpMatrix.scale(0.7f, 0.7f, 0.7f);
+        renderGeneric(pos, entityCam, tmpMatrix, false);
+    }
+
     static final PerspectiveCamera heldItemCamera = new PerspectiveCamera();
 
     @Override
-    public void renderAsHeldItem(Vector3 pos, ItemStack stack2, Camera handCam, float popUpTimer, float maxPopUpTimer, float swingTimer, float maxSwingTimer) {
+    public void renderAsHeldItem(Vector3 pos, Camera handCam, float popUpTimer, float maxPopUpTimer, float swingTimer, float maxSwingTimer) {
         Matrix4 tmpHeldMat4 = new Matrix4();
 
         heldItemCamera.fieldOfView = 50.0F;
@@ -142,10 +151,4 @@ public class ItemThingModel implements IPuzzleItemModel {
         Gdx.gl.glEnable(GL20.GL_DEPTH_TEST);
     }
 
-    @Override
-    public void renderAsEntity(Vector3 pos, ItemStack stack, Camera entityCam, Matrix4 tmpMatrix) {
-        tmpMatrix.translate(0.5F, 0.2F, 0.5F);
-        tmpMatrix.scale(0.7f, 0.7f, 0.7f);
-        renderGeneric(pos, entityCam, tmpMatrix, false);
-    }
 }

@@ -13,4 +13,4 @@ buildscript {
     }
 }
 
-rootProject.name = "PuzzleLoader"
+rootProject.name = "Cosmic-Contributions"

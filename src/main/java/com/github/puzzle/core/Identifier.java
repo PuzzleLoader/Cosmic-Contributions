@@ -2,11 +2,14 @@ package com.github.puzzle.core;
 
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
-import com.github.puzzle.annotations.Stable;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
+
+// Mr-Zombii
+// nanobass
+// tympanicblock61 - zombi
 
 /**
  * Stores information about Registered Objects
@@ -14,7 +17,6 @@ import java.util.Objects;
  * namespaces are usually the modid
  * @author Mr-Zombii
  */
-@Stable
 public class Identifier implements Json.Serializable {
     @Contract(value = "_, _ -> new", pure = true)
     public static @NotNull Identifier of(String namespace, String name) {
