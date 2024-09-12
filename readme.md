@@ -9,3 +9,6 @@ the main dir has new files <br>
 - [x] 3D items
 - [x] ImprovedGameAssetLoader
 - [ ] CustomBlockStateGenerators
+- [x] Id's & Resource Location's
+- [x] Mutliface Text BlockModel
+- [x] Eotated state generator
